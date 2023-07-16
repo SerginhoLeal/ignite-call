@@ -18,7 +18,22 @@
   - npx prisma studio
 
 ## Google OAuth 2.0
+  Existe uma documentação completa nesse link [Google OAuth 2.0](https://developers.google.com/identity/protocols/oauth2?hl=pt-br),
+  mas abordarei apenas o necessário para seguir com esse projeto.
+
+  Primeiro passo você terá que entrar no seu painel 
+
+
   API Consol > Tela de Permissões OAuth > 
 
+## Docker
+  Comando utilizado para rodar o Docker:
+    - docker run --name "nome do projeto" -e MYSQL_ROOT_PASSWORD=docker -p 3306:3306 mysql:latest
+
+  Comando utilizado para iniciar o container
+    - docker start mysql
+
+  Comando utilizado para parar o container:
+    - docker stop mysql
 
 https://blurha.sh/
