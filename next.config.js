@@ -6,7 +6,14 @@ const nextConfig = {
     'page.tsx',
     'api.ts',
     'api.tsx'
-  ]
+  ],
+  webpack: config => {
+    config.resolve.fallback = {
+      fs: false,
+    };
+
+    return config;
+  }
 }
 
 module.exports = nextConfig
