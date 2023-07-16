@@ -4,7 +4,14 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Heading, MultiStep, Text, TextArea, Avatar } from '@ignite-ui/react'
+import {
+  Button,
+  Heading,
+  MultiStep,
+  Text,
+  TextArea,
+  Avatar,
+} from '@ignite-ui/react'
 
 import { ArrowRight } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
@@ -49,14 +56,17 @@ export default function UpdateProfile() {
         <Header>
           <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
           <Text>
-            Precisamos de algumas informações para criar seu perfil! Ah, você pode
-            editar essas informações depois.
+            Precisamos de algumas informações para criar seu perfil! Ah, você
+            pode editar essas informações depois.
           </Text>
 
           <MultiStep size={4} currentStep={4} />
         </Header>
 
-        <Styles.ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
+        <Styles.ProfileBox
+          as="form"
+          onSubmit={handleSubmit(handleUpdateProfile)}
+        >
           <label>
             <Text>Foto de perfil</Text>
             <Avatar

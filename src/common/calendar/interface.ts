@@ -1,19 +1,16 @@
-import dayjs from "dayjs"
+import dayjs from 'dayjs'
 
 interface CalendarWeek {
-  week: number;
+  week: number
   days: Array<{
-    date: dayjs.Dayjs;
-    disabled: boolean;
+    date: dayjs.Dayjs
+    disabled: boolean
   }>
 }
 
 interface CalendarProps {
-  selectedDate: Date | null;
-  onDateSelected: (date: Date) => void;
+  selectedDate: Date | null
+  onDateSelected: (date: Date) => void
 }
 
-export type {
-  CalendarWeek,
-  CalendarProps
-}
+export type { CalendarWeek, CalendarProps }

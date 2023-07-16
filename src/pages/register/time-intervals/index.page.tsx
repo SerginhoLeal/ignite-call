@@ -4,7 +4,14 @@ import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { z } from 'zod'
 
-import { Button, Checkbox, Heading, MultiStep, Text, TextInput} from '@ignite-ui/react'
+import {
+  Button,
+  Checkbox,
+  Heading,
+  MultiStep,
+  Text,
+  TextInput,
+} from '@ignite-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { getWeekDays } from '@/utils'
@@ -21,7 +28,11 @@ type TimeIntervalsFormOutput = z.output<typeof timeIntervalsFormSchema>
 
 export default function TimeIntervals() {
   const {
-    register, handleSubmit, control, watch, formState: { isSubmitting, errors }
+    register,
+    handleSubmit,
+    control,
+    watch,
+    formState: { isSubmitting, errors },
   } = useForm<TimeIntervalsFormInput>({
     resolver: zodResolver(timeIntervalsFormSchema),
     defaultValues: { intervals: Intervals },
@@ -33,7 +44,7 @@ export default function TimeIntervals() {
 
   const { fields } = useFieldArray({ control, name: 'intervals' })
 
-  async function handleSetTimeIntervals(data: any){
+  async function handleSetTimeIntervals(data: any) {
     const { intervals } = data as TimeIntervalsFormOutput
 
     await api.post('/users/time-intervals', { intervals })
@@ -48,14 +59,17 @@ export default function TimeIntervals() {
         <Header>
           <Heading as="strong">Quase lá</Heading>
           <Text>
-            Defina o intervalo de horário que você está disponível em cada dia da
-            semana.
+            Defina o intervalo de horário que você está disponível em cada dia
+            da semana.
           </Text>
 
           <MultiStep size={4} currentStep={3} />
         </Header>
 
-        <Styles.IntervalBox as="form" onSubmit={handleSubmit(handleSetTimeIntervals)}>
+        <Styles.IntervalBox
+          as="form"
+          onSubmit={handleSubmit(handleSetTimeIntervals)}
+        >
           <Styles.IntervalContainer>
             {fields.map((field, index) => (
               <Styles.IntervalItem key={field.id}>
@@ -65,7 +79,9 @@ export default function TimeIntervals() {
                     control={control}
                     render={({ field }) => (
                       <Checkbox
-                        onCheckedChange={(checked) => field.onChange(checked === true)}
+                        onCheckedChange={(checked) =>
+                          field.onChange(checked === true)
+                        }
                         checked={field.value}
                       />
                     )}
@@ -93,7 +109,9 @@ export default function TimeIntervals() {
           </Styles.IntervalContainer>
 
           {errors.intervals && (
-            <Styles.FormError size="sm">{errors.intervals.message}</Styles.FormError>
+            <Styles.FormError size="sm">
+              {errors.intervals.message}
+            </Styles.FormError>
           )}
 
           <Button type="submit" disabled={isSubmitting}>

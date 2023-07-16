@@ -6,7 +6,10 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 import { getGoogleOAuthToken, prisma } from '@services'
 
-export default async function handler( req: NextApiRequest, res: NextApiResponse ) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   if (req.method !== 'POST') return res.status(405).end()
 
   const username = String(req.query.username)
@@ -26,7 +29,9 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     date: z.string().datetime(),
   })
 
-  const { name, email, observations, date } = createSchedulingBody.parse(req.body)
+  const { name, email, observations, date } = createSchedulingBody.parse(
+    req.body,
+  )
 
   const schedulingDate = dayjs(date).startOf('hour')
 
@@ -38,11 +43,13 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     where: {
       user_id: user.id,
       date: schedulingDate.toDate(),
-    }
+    },
   })
 
   if (conflictingScheduling) {
-    return res.status(400).json({ message: 'There is another scheduling at at the same time.' })
+    return res
+      .status(400)
+      .json({ message: 'There is another scheduling at at the same time.' })
   }
 
   const scheduling = await prisma.scheduling.create({
@@ -64,8 +71,9 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     calendarId: 'primary',
     // calendarId: calendario principal de criação de eventos.
     conferenceDataVersion: 1,
-    // conferenceDataVersion: 
-    requestBody: { // requestBody: todas as informações relacionadas ao evento.
+    // conferenceDataVersion:
+    requestBody: {
+      // requestBody: todas as informações relacionadas ao evento.
       summary: `Ignite Call: ${name}`,
       // summary: titulo do evento
       description: observations,
@@ -77,7 +85,8 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
       },
       attendees: [{ email, displayName: name }],
       // attendees: quem vai está convidado para o evento
-      conferenceData: { // criar um evento já com uma chamada no google meet
+      conferenceData: {
+        // criar um evento já com uma chamada no google meet
         createRequest: {
           requestId: scheduling.id,
           conferenceSolutionKey: {
@@ -86,7 +95,6 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
         },
       },
     },
-    
   })
 
   return res.status(201).end()

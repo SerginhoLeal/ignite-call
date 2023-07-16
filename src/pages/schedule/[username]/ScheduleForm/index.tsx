@@ -6,9 +6,14 @@ import { ConfirmStep } from './ConfirmStep'
 export function ScheduleForm() {
   const [selectedDateTime, setSelectedDateTime] = useState<Date | null>()
 
-  const handleClearSelectedDateTime = () => setSelectedDateTime(null);
+  const handleClearSelectedDateTime = () => setSelectedDateTime(null)
 
-  return selectedDateTime
-    ? <ConfirmStep schedulingDate={selectedDateTime} onCancelConfirmation={handleClearSelectedDateTime} />
-    : <CalendarStep onSelectDateTime={setSelectedDateTime} />
+  return selectedDateTime ? (
+    <ConfirmStep
+      schedulingDate={selectedDateTime}
+      onCancelConfirmation={handleClearSelectedDateTime}
+    />
+  ) : (
+    <CalendarStep onSelectDateTime={setSelectedDateTime} />
+  )
 }

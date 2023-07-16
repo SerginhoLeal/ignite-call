@@ -9,7 +9,9 @@ export function PrismaAdapter(
 ): Adapter {
   return {
     async createUser(user) {
-      const { '@ignitecall:userId': userIdOnCookies } = parseCookies({ req: request })
+      const { '@ignitecall:userId': userIdOnCookies } = parseCookies({
+        req: request,
+      })
 
       if (!userIdOnCookies) {
         throw new Error('User ID not found on cookies.')
@@ -45,7 +47,7 @@ export function PrismaAdapter(
         },
       })
 
-      if (!user){
+      if (!user) {
         return null
       }
 
@@ -66,7 +68,7 @@ export function PrismaAdapter(
         },
       })
 
-      if (!user){
+      if (!user) {
         return null
       }
 
@@ -81,7 +83,7 @@ export function PrismaAdapter(
     },
 
     async getUserByAccount({ providerAccountId, provider }) {
-      const account= await prisma.account.findUnique({
+      const account = await prisma.account.findUnique({
         where: {
           provider_provider_account_id: {
             provider,
@@ -93,11 +95,11 @@ export function PrismaAdapter(
         },
       })
 
-      if (!account){
+      if (!account) {
         return null
       }
 
-      const { user } = account;
+      const { user } = account
 
       return {
         id: user.id,
@@ -114,7 +116,7 @@ export function PrismaAdapter(
         where: {
           id: id!,
         },
-        data: { name, email, avatar_url }
+        data: { name, email, avatar_url },
       })
 
       return {
@@ -128,7 +130,17 @@ export function PrismaAdapter(
     },
 
     async linkAccount({
-      userId, type, provider, providerAccountId, refresh_token, access_token, expires_at, token_type, scope, id_token, session_state
+      userId,
+      type,
+      provider,
+      providerAccountId,
+      refresh_token,
+      access_token,
+      expires_at,
+      token_type,
+      scope,
+      id_token,
+      session_state,
     }) {
       await prisma.account.create({
         data: {
@@ -174,10 +186,10 @@ export function PrismaAdapter(
       })
 
       if (!PSession) {
-        return null;
-      };
+        return null
+      }
 
-      const { user, ...session } = PSession;
+      const { user, ...session } = PSession
 
       return {
         session: {

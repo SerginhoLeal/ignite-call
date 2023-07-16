@@ -3,6 +3,4 @@ interface Availability {
   availableTimes: number[]
 }
 
-export type {
-  Availability
-}
+export type { Availability }

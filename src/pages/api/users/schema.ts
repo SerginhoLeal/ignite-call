@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod'
 
 export const timeIntervalsBodySchema = z.object({
   intervals: z.array(

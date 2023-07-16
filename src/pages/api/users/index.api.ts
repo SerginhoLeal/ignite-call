@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from '@services';
+import { prisma } from '@services'
 import { setCookie } from 'nookies'
 
 export default async function handler(
@@ -10,7 +10,7 @@ export default async function handler(
     return res.status(405).end()
   }
 
-  const { name, username } = req.body;
+  const { name, username } = req.body
 
   const userExists = await prisma.user.findUnique({
     where: {
@@ -27,12 +27,12 @@ export default async function handler(
       name,
       username,
     },
-  });
+  })
 
   setCookie({ res }, '@ignitecall:userId', user.id, {
     maxAge: 60 * 60 * 24 * 7, // 7 days
     path: '/',
-  });
+  })
 
   return res.status(201).json(user)
 }

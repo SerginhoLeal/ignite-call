@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod'
 
 const confirmFormSchema = z.object({
   name: z.string().min(3, { message: 'O nome precisa no mínimo 3 caracteres' }),
@@ -6,6 +6,4 @@ const confirmFormSchema = z.object({
   observations: z.string().nullable(),
 })
 
-export {
-  confirmFormSchema
-}
+export { confirmFormSchema }

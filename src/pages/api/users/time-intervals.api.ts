@@ -14,7 +14,11 @@ export default async function handler(
     return res.status(405).end()
   }
 
-  const session = await unstable_getServerSession(req, res, buildNextAuthOptions(req, res))
+  const session = await unstable_getServerSession(
+    req,
+    res,
+    buildNextAuthOptions(req, res),
+  )
 
   if (!session) {
     return res.status(401).end()

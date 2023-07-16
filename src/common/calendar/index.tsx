@@ -70,15 +70,19 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
     // day: dia da semana: seg/ter/qua/qui/sex
     const firstWeekDay = currentDate.get('day')
 
-    const previousMonthFillArray = Array.from({ length: firstWeekDay})
+    const previousMonthFillArray = Array.from({ length: firstWeekDay })
       .map((_, i) => currentDate.subtract(i + 1, 'day'))
       .reverse()
 
-    const lastDayInCurrentMonth = currentDate.set('date',currentDate.daysInMonth())
+    const lastDayInCurrentMonth = currentDate.set(
+      'date',
+      currentDate.daysInMonth(),
+    )
     const lastWeekDay = lastDayInCurrentMonth.get('day')
 
-    const nextMonthFillArray = Array.from({ length: 7 - (lastWeekDay + 1) })
-      .map((_, i) => lastDayInCurrentMonth.add(i + 1, 'day'))
+    const nextMonthFillArray = Array.from({
+      length: 7 - (lastWeekDay + 1),
+    }).map((_, i) => lastDayInCurrentMonth.add(i + 1, 'day'))
 
     const calendarDays = [
       ...previousMonthFillArray.map((date) => ({ date, disabled: true })),
@@ -145,7 +149,10 @@ export function Calendar({ selectedDate, onDateSelected }: CalendarProps) {
                 {days.map(({ date, disabled }) => {
                   return (
                     <td key={date.toString()}>
-                      <Styles.CalendarDay onClick={() => onDateSelected(date.toDate())} disabled={disabled}>
+                      <Styles.CalendarDay
+                        onClick={() => onDateSelected(date.toDate())}
+                        disabled={disabled}
+                      >
                         {date.get('date')}
                       </Styles.CalendarDay>
                     </td>

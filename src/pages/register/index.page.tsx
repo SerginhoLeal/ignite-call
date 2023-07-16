@@ -17,30 +17,34 @@ type RegisterFormData = z.infer<typeof registerFormSchema>
 
 export default function Register() {
   const router = useRouter()
-  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<RegisterFormData>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
     resolver: zodResolver(registerFormSchema),
   })
 
   async function handleRegister(data: RegisterFormData) {
-    const { name, username } = data;
+    const { name, username } = data
     try {
-      await api.post('/users', { name, username });
+      await api.post('/users', { name, username })
       await router.push('/register/connect-calendar')
     } catch (err) {
-      if(err instanceof AxiosError && err?.response?.data?.message){
+      if (err instanceof AxiosError && err?.response?.data?.message) {
         return alert(err?.response?.data?.message)
-      };
+      }
 
-      console.error(err);
+      console.error(err)
     }
-  };
+  }
 
   useEffect(() => {
     if (router.query.username) {
       setValue('username', String(router.query.username))
     }
   }, [router.query?.username, setValue])
-
 
   return (
     <>
@@ -49,8 +53,8 @@ export default function Register() {
         <Header>
           <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
           <Text>
-            Precisamos de algumas informações para criar seu perfil! Ah, você pode
-            editar essas informações depois.
+            Precisamos de algumas informações para criar seu perfil! Ah, você
+            pode editar essas informações depois.
           </Text>
 
           <MultiStep size={4} currentStep={1} />
@@ -59,16 +63,24 @@ export default function Register() {
         <Form as="form" onSubmit={handleSubmit(handleRegister)}>
           <label>
             <Text size="sm">Nome de usuário</Text>
-            <TextInput prefix="ignite.com/" placeholder="seu-usuário" {...register('username')} />
+            <TextInput
+              prefix="ignite.com/"
+              placeholder="seu-usuário"
+              {...register('username')}
+            />
 
-            {errors.username && <FormError size="sm">{errors.username.message}</FormError>}
+            {errors.username && (
+              <FormError size="sm">{errors.username.message}</FormError>
+            )}
           </label>
 
           <label>
             <Text size="sm">Nome completo</Text>
             <TextInput placeholder="Seu nome" {...register('name')} />
 
-            {errors.name && <FormError size="sm">{errors.name.message}</FormError>}
+            {errors.name && (
+              <FormError size="sm">{errors.name.message}</FormError>
+            )}
           </label>
 
           <Button type="submit" disabled={isSubmitting}>

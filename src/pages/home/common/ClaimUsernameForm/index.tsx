@@ -11,16 +11,20 @@ import { ClaimUsernameFormSchema } from './zod'
 type ClaimUsernameFormData = z.infer<typeof ClaimUsernameFormSchema>
 
 export function ClaimUsernameForm() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ClaimUsernameFormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ClaimUsernameFormData>({
     resolver: zodResolver(ClaimUsernameFormSchema),
-  });
+  })
 
   async function handleClaimUsername(data: ClaimUsernameFormData) {
     const { username } = data
     router.push(`/register?username=${username}`)
-  };
+  }
 
   return (
     <>

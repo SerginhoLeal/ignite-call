@@ -3,6 +3,4 @@ interface ConfirmStepProps {
   onCancelConfirmation: () => void
 }
 
-export type {
-  ConfirmStepProps
-}
+export type { ConfirmStepProps }

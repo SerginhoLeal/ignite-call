@@ -1,27 +1,28 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+/* eslint-disable */
+import { PrismaClient } from '@prisma/client'
 
 declare global {
   namespace NodeJS {
     interface Global {
-      prisma: PrismaClient;
+      prisma: PrismaClient
     }
   }
 }
 
-let prisma: PrismaClient;
+let prisma: PrismaClient
 
-if (typeof window === "undefined") {
-  if (process.env.NODE_ENV === "production") {
-    prisma = new PrismaClient();
+if (typeof window === 'undefined') {
+  if (process.env.NODE_ENV === 'production') {
+    prisma = new PrismaClient()
   } else {
     if (!global.prisma) {
       global.prisma = new PrismaClient({
-        log: ['query']
-      });
+        log: ['query'],
+      })
     }
 
-    prisma = global.prisma;
+    prisma = global.prisma
   }
 }
 
-export { prisma };
+export { prisma }

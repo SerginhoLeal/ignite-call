@@ -17,8 +17,15 @@ import * as Styles from './styles'
 
 type ConfirmFormData = z.infer<typeof confirmFormSchema>
 
-export function ConfirmStep({ schedulingDate, onCancelConfirmation }: ConfirmStepProps) {
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<ConfirmFormData>({
+export function ConfirmStep({
+  schedulingDate,
+  onCancelConfirmation,
+}: ConfirmStepProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+  } = useForm<ConfirmFormData>({
     resolver: zodResolver(confirmFormSchema),
   })
 
@@ -42,7 +49,10 @@ export function ConfirmStep({ schedulingDate, onCancelConfirmation }: ConfirmSte
   }
 
   return (
-    <Styles.ConfirmForm as="form" onSubmit={handleSubmit(handleConfirmScheduling)}>
+    <Styles.ConfirmForm
+      as="form"
+      onSubmit={handleSubmit(handleConfirmScheduling)}
+    >
       <Styles.FormHeader>
         <Text>
           <CalendarBlank />
@@ -57,13 +67,21 @@ export function ConfirmStep({ schedulingDate, onCancelConfirmation }: ConfirmSte
       <label>
         <Text size="sm">Nome completo</Text>
         <TextInput placeholder="Seu nome" {...register('name')} />
-        {errors.name && <Styles.FormError size="sm">{errors.name.message}</Styles.FormError>}
+        {errors.name && (
+          <Styles.FormError size="sm">{errors.name.message}</Styles.FormError>
+        )}
       </label>
 
       <label>
         <Text size="sm">Endereço de e-mail</Text>
-        <TextInput type="email" placeholder="johndoe@example.com" {...register('email')} />
-        {errors.email && <Styles.FormError size="sm">{errors.email.message}</Styles.FormError>}
+        <TextInput
+          type="email"
+          placeholder="johndoe@example.com"
+          {...register('email')}
+        />
+        {errors.email && (
+          <Styles.FormError size="sm">{errors.email.message}</Styles.FormError>
+        )}
       </label>
 
       <label>

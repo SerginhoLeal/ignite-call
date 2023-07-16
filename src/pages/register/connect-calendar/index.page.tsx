@@ -9,8 +9,8 @@ import { Container, Header } from '../styles'
 import * as Styles from './styles'
 
 export default function ConnectCalendar() {
-  const session = useSession();
-  const router = useRouter();
+  const session = useSession()
+  const router = useRouter()
 
   const hasAuthError = !!router.query.error
   const isSignedId = session.status === 'authenticated'
@@ -46,7 +46,11 @@ export default function ConnectCalendar() {
                 <Check />
               </Button>
             ) : (
-              <Button variant="secondary" size="sm" onClick={handleConnectCalendar}>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={handleConnectCalendar}
+              >
                 Conectar
                 <ArrowRight />
               </Button>
@@ -60,7 +64,11 @@ export default function ConnectCalendar() {
             </Styles.AuthError>
           )}
 
-          <Button type="submit" disabled={!isSignedId} onClick={handleNavigateToNextStep}>
+          <Button
+            type="submit"
+            disabled={!isSignedId}
+            onClick={handleNavigateToNextStep}
+          >
             Próximo passo
             <ArrowRight />
           </Button>

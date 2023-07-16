@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 const ClaimUsernameFormSchema = z.object({
   username: z
@@ -8,8 +8,6 @@ const ClaimUsernameFormSchema = z.object({
       message: 'O usuário pode ter apenas letras e hifens.',
     })
     .transform((username) => username.toLowerCase()),
-});
+})
 
-export {
-  ClaimUsernameFormSchema
-}
+export { ClaimUsernameFormSchema }

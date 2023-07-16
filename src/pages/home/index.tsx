@@ -1,12 +1,12 @@
 import { NextSeo } from 'next-seo'
-import Image from "next/image";
+import Image from 'next/image'
 
-import { Heading, Text } from "@ignite-ui/react";
+import { Heading, Text } from '@ignite-ui/react'
 
-import { ClaimUsernameForm } from './common/ClaimUsernameForm';
+import { ClaimUsernameForm } from './common/ClaimUsernameForm'
 
-import * as Styles from "./styles";
-import AppPreview from '../../assets/app-preview.png';
+import * as Styles from './styles'
+import AppPreview from '../../assets/app-preview.png'
 
 export default function Home() {
   return (
@@ -18,7 +18,10 @@ export default function Home() {
       <Styles.Container>
         <Styles.Hero>
           <Heading>Agendamento Descomplicado</Heading>
-          <Text>Conecte seu calendário e permita que as pessoas marquem agendamentos no seu tempo livre.</Text>
+          <Text>
+            Conecte seu calendário e permita que as pessoas marquem agendamentos
+            no seu tempo livre.
+          </Text>
           <ClaimUsernameForm />
         </Styles.Hero>
         <Styles.Preview>

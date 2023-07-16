@@ -7,10 +7,13 @@ export async function getGoogleOAuthToken(userId: string) {
     where: {
       provider: 'google',
       user_id: userId,
-    }
+    },
   })
 
-  const auth = new google.auth.OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET)
+  const auth = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+  )
 
   auth.setCredentials({
     access_token: account.access_token,
@@ -26,7 +29,14 @@ export async function getGoogleOAuthToken(userId: string) {
 
   if (isTokenExpired) {
     const { credentials } = await auth.refreshAccessToken()
-    const { access_token, expiry_date, id_token, refresh_token, scope, token_type } = credentials
+    const {
+      access_token,
+      expiry_date,
+      id_token,
+      refresh_token,
+      scope,
+      token_type,
+    } = credentials
 
     await prisma.account.update({
       where: {
